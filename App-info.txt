@@ -1,0 +1,27 @@
+This is a online shopping application developed by using spring cloud.
+Services are added
+	config-server
+	eureka-server
+	search-service
+	product-service
+	order-service
+	cart-service
+	user-service
+	customer-service
+	
+	shopping-gateway
+
+
+config-server
+	To test the config server (after the server only)
+		http://localhost:2020/ConfigServer/application/default/
+		
+		application -> is the property file name
+		default -> is the environment profile, we can use dev, qa or prod alos to see specific env properties.
+		
+		The config server searches for the master branch, if it is not ther it will throw an error.
+		We can specify the branch also where the application properties are present
+		
+		http://localhost:2020/ConfigServer/application/default/main
+		
+		

@@ -1,0 +1,16 @@
+server:  port: 9999
+
+spring:
+  application:
+    name: ShoppingGateway
+  cloud:    loadbalancer:      ribbon:        enabled: false
+    gateway:
+      routes:
+      - id: searchservice_route
+        uri: lb://SearchService#        uri: http://localhost:2031
+        predicates:
+        - Path=/SearchService/search/**
+      - id: productservice_route
+        uri: lb://ProductService#        uri: http://localhost:2032
+        predicates:
+        - Path=/ProductService/product/**
