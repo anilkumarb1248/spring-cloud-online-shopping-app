@@ -8,8 +8,17 @@ Services are added
 	cart-service
 	user-service
 	customer-service
-	
 	shopping-gateway
+	
+Need to follow the order while starting the services:
+First start the "Config Server" - static port - 2020 - http://localhost:2020/ConfigServer/application/default/
+Next "Eureka Server" - static port - 2070 - http://localhost:2070/EurekaServer/
+Next "API Gateway" - static port - 9999
+	Note: without API gateway we can't access the services, using random ports for the services.
+
+Then start the services like product, search ...
+
+Import the Soap UI project and test the services which are added.
 
 
 config-server

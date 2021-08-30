@@ -1,65 +1,58 @@
-package com.online.shopping.product.dto;
+package com.online.shopping.product.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.UniqueConstraint;
+
+import com.online.shopping.product.enums.ProductType;
+
+@Entity
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue
 	private int productId;
+
 	private String productName;
-	private String type;
+	private ProductType type;
 
 	public Product() {
 		super();
 	}
 
-	public Product(int productId, String productName, String type) {
+	public Product(int productId, String productName, ProductType type) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.type = type;
 	}
 
-	/**
-	 * @return the productId
-	 */
 	public int getProductId() {
 		return productId;
 	}
 
-	/**
-	 * @param productId the productId to set
-	 */
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
 
-	/**
-	 * @return the productName
-	 */
 	public String getProductName() {
 		return productName;
 	}
 
-	/**
-	 * @param productName the productName to set
-	 */
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
 
-	/**
-	 * @return the type
-	 */
-	public String getType() {
+	public ProductType getType() {
 		return type;
 	}
 
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(String type) {
+	public void setType(ProductType type) {
 		this.type = type;
 	}
 

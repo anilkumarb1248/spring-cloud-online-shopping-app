@@ -2,64 +2,46 @@ package com.online.shopping.search.dto;
 
 import java.io.Serializable;
 
-public class Product implements Serializable {
+public class ProductDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private int productId;
 	private String productName;
-	private String type;
+	private ProductType type;
 
-	public Product() {
+	public ProductDTO() {
 		super();
 	}
 
-	public Product(int productId, String productName, String type) {
+	public ProductDTO(int productId, String productName, ProductType type) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.type = type;
 	}
 
-	/**
-	 * @return the productId
-	 */
 	public int getProductId() {
 		return productId;
 	}
 
-	/**
-	 * @param productId the productId to set
-	 */
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
 
-	/**
-	 * @return the productName
-	 */
 	public String getProductName() {
 		return productName;
 	}
 
-	/**
-	 * @param productName the productName to set
-	 */
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
 
-	/**
-	 * @return the type
-	 */
-	public String getType() {
+	public ProductType getType() {
 		return type;
 	}
 
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(String type) {
+	public void setType(ProductType type) {
 		this.type = type;
 	}
 

@@ -1,8 +1,8 @@
-server:  port: 9999
+server:  port: 9999# Not working with context path, need to modify the routes if we add#  servlet: #    context-path: /ShoppingGateway
 
 spring:
   application:
-    name: ShoppingGateway
+    name: ShoppingGateway  zipkin:    base-url: http://localhost:9411/
   cloud:    loadbalancer:      ribbon:        enabled: false
     gateway:
       routes:
@@ -13,4 +13,4 @@ spring:
       - id: productservice_route
         uri: lb://ProductService#        uri: http://localhost:2032
         predicates:
-        - Path=/ProductService/product/**
+        - Path=/ProductService/product/**

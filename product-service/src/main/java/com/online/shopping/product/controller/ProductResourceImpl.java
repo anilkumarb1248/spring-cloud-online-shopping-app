@@ -1,14 +1,17 @@
 package com.online.shopping.product.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.online.shopping.product.dto.Product;
+import com.online.shopping.product.dto.ProductDTO;
+import com.online.shopping.product.service.ProductService;
+import com.online.shopping.product.util.DummyData;
+import com.online.shopping.product.util.ProductResponseStatus;
 
 @RestController
 public class ProductResourceImpl implements ProductResource {
@@ -18,35 +21,62 @@ public class ProductResourceImpl implements ProductResource {
 	@Autowired
 	Environment environment;
 
+	@Autowired
+	ProductService productService;
+
 	@Override
 	public String test() {
 		String port = environment.getProperty("local.server.port");
-		LOGGER.info("SearchService is working on port: {}", port);
-		return "SearchService is working on port: " + port;
+		LOGGER.info("ProductService is working on port: {}", port);
+		return "ProductService is working on port: " + port;
 	}
 
 	@Override
-	public Product getProduct(int productId) {
+	public ProductDTO getProduct(int productId) {
 
 		LOGGER.info("ProductService: getProduct() execution start");
 		LOGGER.info("ProductService: Searching for product: {}", productId);
 
-		Product product = new Product();
-		product.setProductId(productId);
-		product.setProductName("Car");
-		product.setType("Vehicle");
-
-		if (LOGGER.isDebugEnabled()) {
-			try {
-				LOGGER.debug("Found the product with id: {} {}", productId,
-						new ObjectMapper().writeValueAsString(product));
-			} catch (JsonProcessingException e) {
-				LOGGER.debug("Exception occured while processing the data: {}", e.getMessage());
-			}
-		}
-
-		LOGGER.info("ProductService: getProduct() execution end");
-		return product;
+		return productService.getProduct(productId);
+	}
+	
+	@Override
+	public ProductDTO getProductByName(String productName) {
+		return productService.getProductByName(productName);
 	}
 
+	@Override
+	public List<ProductDTO> getAllProducts() {
+		return productService.getAllProducts();
+	}
+
+	@Override
+	public ProductResponseStatus addProduct(ProductDTO productDTO) {
+		return productService.addProduct(productDTO);
+	}
+
+	@Override
+	public ProductResponseStatus updateProduct(int productId, ProductDTO productDTO) {
+		return productService.updateProduct(productId, productDTO);
+	}
+
+	@Override
+	public ProductResponseStatus deleteProduct(int productId) {
+		return productService.deleteProduct(productId);
+	}
+	
+	@Override
+	public ProductResponseStatus deleteAllProducts() {
+		return productService.deleteAllProducts();
+	}
+	
+	@Override
+	public List<ProductDTO> getProductsByType(String type) {
+		return productService.getProductsByType(type);
+	}
+
+	@Override
+	public ProductResponseStatus insertDummyData() {
+		return productService.saveAll(DummyData.getDummyData());
+	}
 }
