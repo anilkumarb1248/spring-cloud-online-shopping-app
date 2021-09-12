@@ -2,7 +2,7 @@ server:  port: 9999# Not working with context path, need to modify the routes 
 
 spring:
   application:
-    name: ShoppingGateway  zipkin:    base-url: http://localhost:9411/
+    name: ShoppingGateway#  zipkin:#    base-url: http://localhost:9411/
   cloud:    loadbalancer:      ribbon:        enabled: false
     gateway:
       routes:
@@ -10,7 +10,6 @@ spring:
         uri: lb://SearchService#        uri: http://localhost:2031
         predicates:
         - Path=/SearchService/search/**
-      - id: productservice_route
-        uri: lb://ProductService#        uri: http://localhost:2032
+      - id: productservice_route        uri: lb://ProductService#        uri: http://localhost:2032
         predicates:
         - Path=/ProductService/product/**

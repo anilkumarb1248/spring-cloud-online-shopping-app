@@ -33,4 +33,30 @@ config-server
 		
 		http://localhost:2020/ConfigServer/application/default/main
 		
+
+
+----
+Done many docker configurations
+eureka host changes in all microservices and in git repo
+config server changes in all ms
+Added Docker file and unpacke plugin in all ms
+Using static ports instead of using dynamic port 
+
+-- To create the images by using Docker file
+docker build -f Dockerfile -t config-server-img:latest .
+docker build -f Dockerfile -t eureka-server-img:latest .
+docker build -f Dockerfile -t product-service-img:latest .
+docker build -f Dockerfile -t search-service-img:latest .
+docker build -f Dockerfile -t shopping-gateway-img:latest .
+
+mvn clean package
+
+docker network create online-shopping-app
+
+-- Running the containers
+docker container run --network=online-shopping-app -d -p 2020:2020 --name=config-server-container config-server-img
+docker container run --network=online-shopping-app -d -p 2070:2070 --name=eureka-server-container eureka-server-img
+docker container run --network=online-shopping-app -d -p 2032:2032 --name=product-service-container product-service-img
+docker container run --network=online-shopping-app -d -p 2031:2031 --name=search-service-container search-service-img
+docker container run --network=online-shopping-app -d -p 9999:9999 --name=shopping-gateway-container shopping-gateway-img
 		
